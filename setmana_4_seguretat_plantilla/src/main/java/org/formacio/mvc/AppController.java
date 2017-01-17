@@ -18,8 +18,19 @@ public class AppController {
 		return "Aixo nomes ho ha de veure un administrador";
 	}
 	
+	/**
+	 * Declarant un parametre anotat amb @AuthenticationPrincipal podem tenir acces
+	 * a les dades de l'usuari que fa la peticio.
+	 * 
+	 * Serviria, per exemple, per poder fer una accio o una altra en funcio de les caracteristiques
+	 * d'aquest usuari.
+	 */
 	@RequestMapping(path="/gestio/user.txt")
 	public String infoGestors(@AuthenticationPrincipal User user) {
+		
+		// tipicament fariem algo com :
+		// servei.consultaDades(user.getUsername());
+		
 		return "Hola " + user.getUsername() + ", estas a la part de gestio";
 	}
 	
