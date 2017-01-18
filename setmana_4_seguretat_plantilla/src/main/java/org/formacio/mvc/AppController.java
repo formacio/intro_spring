@@ -28,7 +28,7 @@ public class AppController {
 	@RequestMapping(path="/gestio/user.txt")
 	public String infoGestors(@AuthenticationPrincipal User user) {
 		
-		// tipicament fariem algo com :
+		// Un cas tipic seria retornar les dades de l'usuari que s'ha conectat
 		// servei.consultaDades(user.getUsername());
 		
 		return "Hola " + user.getUsername() + ", estas a la part de gestio";
