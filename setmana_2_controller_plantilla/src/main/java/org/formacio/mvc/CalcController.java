@@ -1,15 +1,49 @@
 package org.formacio.mvc;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
+/**
+ * Controlador web que ofereix funcionalitat per fer calculs
+ * 
+ * El @RequestMapping a nivell de classe fa que tots els paths especificats
+ * al metodes amb @RequestMapping tenguin un path amb el prefixe "/cal"
+ */
 @Controller
+@RequestMapping("/calc")
 public class CalcController {
 
-	@RequestMapping(path="info")
+	/**
+	 * Mapping senzill a /calc/info que retorna un String fitxe
+	 * @ResponseBody fa que Spring MVC retorni al client el que retorna el metode
+	 */
+	@RequestMapping(path="/info")
 	@ResponseBody
 	public String info() {
 		return "Calculadora online";
 	}
+	
+	/**
+	 * Metode amb parametres. En aquest els parametres agafen la configuracio per defecte.
+	 * El tipus de retorn es convertit a JSON per la llibreria jackson 
+	 */
+	@RequestMapping(path="/suma")
+	@ResponseBody
+	public Operacio suma (int a, int b) {
+		return new Operacio(a,b,a + b);
+	}
+	
+	/**
+	 * Us d'un path variable: part del path emprat es mapeijat a una variable de metode
+	 * p.e. /calc/seguent/5  fa que el valor del parametre original sigui 5
+	 */
+	@RequestMapping(path="/seguent/{original}")
+	@ResponseBody
+	public int seguent(@PathVariable int original) {
+		return original +  1;
+	}
+	
 }
